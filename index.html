@@ -119,16 +119,19 @@
         y: 1
     }
 
+    var currentLocation = elements[world[ninjaCoordinates.y][ninjaCoordinates.x]];
+
     const drawNinjaMan = () => {
         ninjaPac.left = `${ninjaCoordinates.x * 40}px`
         ninjaPac.top = `${ninjaCoordinates.y * 40}px`
     }
     
-    document.onkeydown = function(e){
+    document.onkeydown = function(e){  //execute if arrow key is pressed
         const LEFT_KEY = 37
 		const UP_KEY = 38
 		const RIGHT_KEY = 39
 		const DOWN_KEY = 40
+
         if (e.keyCode==LEFT_KEY && world[ninjaCoordinates.y][ninjaCoordinates.x-1] != 0){
             ninjaCoordinates.x--
         } else if (e.keyCode==UP_KEY && world[ninjaCoordinates.y-1][ninjaCoordinates.x] != 0) {
@@ -139,15 +142,14 @@
             ninjaCoordinates.y++
         }
         drawNinjaMan();
-        // console.log(world[ninjaCoordinates.y][ninjaCoordinates.x], elements[world[ninjaCoordinates.y][ninjaCoordinates.x]])
-        if (world[ninjaCoordinates.y][ninjaCoordinates.x]==2 || world[ninjaCoordinates.y][ninjaCoordinates.x]==3){   // Eaten a food
+
+        if (world[ninjaCoordinates.y][ninjaCoordinates.x]==2 || world[ninjaCoordinates.y][ninjaCoordinates.x]==3){   // Eats a food
             if (world[ninjaCoordinates.y][ninjaCoordinates.x]==2){score += 10}
             else if (world[ninjaCoordinates.y][ninjaCoordinates.x]==3){score += 5}
-            console.log(score)
             world[ninjaCoordinates.y][ninjaCoordinates.x] = 1
             createWorld();
         }
-        if (world[ninjaCoordinates.y][ninjaCoordinates.x]==5){   // Hit by a monstar
+        if (world[ninjaCoordinates.y][ninjaCoordinates.x]==5){   // Hit by a monster
             lives--
             createWorld();
             if (lives==0) {
@@ -155,7 +157,6 @@
                 window.location.reload();
             }
         }
-        
         
     }
 
