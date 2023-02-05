@@ -12,6 +12,7 @@
     <div id="ninjaman"></div>
     <div id="pumpky"></div>
     <div id="scaredy"></div>
+    <script src=""></script>
 </body>
 <script type="text/javascript">
     var ninjaPac = document.getElementById("ninjaman").style;
@@ -38,20 +39,20 @@
     };
     var score = 0;
     var lives = 3;
-    var ninjaCoordinates = {
+    var ninjaCoordinates = { // Ninja's initial position
         x: 1,
         y: 1
     }
-    var pumpkyCoordinates = {
+    var pumpkyCoordinates = { // Pumpky's initial position
         x: 8,
         y: 1
     }
-    var scaredyCoordinates = {
+    var scaredyCoordinates = { // Scaredy's initial position
         x: 8,
         y: 7
     }
-    var isCollidedWithPumpky = (ninjaCoordinates.x === pumpkyCoordinates.x) && (ninjaCoordinates.y === pumpkyCoordinates.y)
-    var isCollidedWithScaredy = (ninjaCoordinates.x == scaredyCoordinates.x) && (ninjaCoordinates.y == scaredyCoordinates.y)
+    // var isCollidedWithPumpky = (ninjaCoordinates.x === pumpkyCoordinates.x) && (ninjaCoordinates.y === pumpkyCoordinates.y)
+    // var isCollidedWithScaredy = (ninjaCoordinates.x == scaredyCoordinates.x) && (ninjaCoordinates.y == scaredyCoordinates.y)
     
 
     // var ninjaCurrentLocation = world[ninjaCoordinates.y][ninjaCoordinates.x];
@@ -87,6 +88,33 @@
         scaredy.left = `${scaredyCoordinates.x*40}px`
         scaredy.top = `${scaredyCoordinates.y*40}px`
     }
+
+    const moveLeftPumpky = () => {
+        pumpkyCoordinates.x -= 1
+        movePumpky();
+    }
+
+    const moveDownPumpky = () => {
+        pumpkyCoordinates.y += 1
+        movePumpky();
+    }
+
+    const moveUpPumpky = () => {
+        pumpkyCoordinates.y -= 1
+        movePumpky();
+    }
+
+    const moveRightPumpky = () => {
+        pumpkyCoordinates.x += 1
+        movePumpky();
+    }
+
+//     var movingPumpky = setInterval(stepPumpky, 100)
+
+//     var stepPumpky = ()=>{
+//     pumpkyCoordinates.x += 1;
+//     movePumpky();
+// }
 
     // Execute if arrow key is pressed
     
@@ -124,7 +152,7 @@
 
         // Life will decrement when collide by a monster (WORK IN PROGRESS)
 
-        if ((ninjaCoordinates.x === pumpkyCoordinates.x) && (ninjaCoordinates.y === pumpkyCoordinates.y) || (ninjaCoordinates.x == scaredyCoordinates.x) && (ninjaCoordinates.y == scaredyCoordinates.y)){   
+        if ((ninjaCoordinates.x === pumpkyCoordinates.x && ninjaCoordinates.y === pumpkyCoordinates.y) || (ninjaCoordinates.x == scaredyCoordinates.x && ninjaCoordinates.y == scaredyCoordinates.y)){   
             lives--
             createWorld();
             if (lives<0) {
@@ -132,6 +160,10 @@
                 window.location.reload();
             }
         }
+
+        // Game Over if all foods are eaten
+
+        
 
         // if ( isCollidedWithPumpky || isCollidedWithScaredy ){   
         //     lives--
@@ -143,6 +175,8 @@
         // }
         
     }
+
+
 
 </script>
 </html>
