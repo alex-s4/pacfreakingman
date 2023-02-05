@@ -46,6 +46,11 @@
         x: 8,
         y: 1
     }
+    var scaredyCoordinates = {
+        x: 8,
+        y: 7
+    }
+    
 
     // var currentLocation = elements[world[ninjaCoordinates.y][ninjaCoordinates.x]];
 
@@ -74,7 +79,10 @@
         pumpky.top = `${pumpkyCoordinates.y*40}px`
     }
 
-
+    const moveScaredy = () => {
+        scaredy.left = `${scaredyCoordinates.x*40}px`
+        scaredy.top = `${scaredyCoordinates.y*40}px`
+    }
 
     // Execute if arrow key is pressed
     
@@ -107,16 +115,16 @@
         }
 
 
-        // Life will decrement when hit by a monster
+        // Life will decrement when hit by a monster (WORK IN PROGRESS)
 
-        if (world[ninjaCoordinates.y][ninjaCoordinates.x]==5){   
-            lives--
-            createWorld();
-            if (lives<0) {
-                alert("You have died!")
-                window.location.reload();
-            }
-        }
+        // if (world[ninjaCoordinates.y][ninjaCoordinates.x]==5){   
+        //     lives--
+        //     createWorld();
+        //     if (lives<0) {
+        //         alert("You have died!")
+        //         window.location.reload();
+        //     }
+        // }
         
     }
 
