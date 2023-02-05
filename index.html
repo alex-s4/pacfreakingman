@@ -152,7 +152,7 @@
         if (world[ninjaCoordinates.y][ninjaCoordinates.x]==5){   // Hit by a monster
             lives--
             createWorld();
-            if (lives==0) {
+            if (lives<0) {
                 alert("You have died!")
                 window.location.reload();
             }
