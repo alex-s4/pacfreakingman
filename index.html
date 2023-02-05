@@ -52,7 +52,9 @@
     }
     
 
-    // var currentLocation = elements[world[ninjaCoordinates.y][ninjaCoordinates.x]];
+    var ninjaCurrentLocation = world[ninjaCoordinates.y][ninjaCoordinates.x];
+    var pumpkyCurrentLocation = world[pumpkyCoordinates.y][pumpkyCoordinates.x];
+    var scaredyCurrentLocation = world[scaredyCoordinates.y][scaredyCoordinates.x];
 
     const createWorld = () => {
         output = "";
@@ -115,16 +117,16 @@
         }
 
 
-        // Life will decrement when hit by a monster (WORK IN PROGRESS)
+        // Life will decrement when collide by a monster (WORK IN PROGRESS)
 
-        // if (world[ninjaCoordinates.y][ninjaCoordinates.x]==5){   
-        //     lives--
-        //     createWorld();
-        //     if (lives<0) {
-        //         alert("You have died!")
-        //         window.location.reload();
-        //     }
-        // }
+        if (ninjaCoordinates.x == pumpkyCoordinates.x && ninjaCoordinates.y == pumpkyCoordinates.y || ninjaCoordinates.x == scaredyCoordinates.x && ninjaCoordinates.y == scaredyCoordinates.y){   
+            lives--
+            createWorld();
+            if (lives<0) {
+                alert("You have died!")
+                window.location.reload();
+            }
+        }
         
     }
 
