@@ -35,21 +35,28 @@
             background-image: url('onigiri.png');
             background-size: contain;
         }
-        .pumpky {
+        #pumpky {
             background-color: rgb(177, 175, 175);
             width: 40px;
             height: 40px;
             display: inline-block;
             background-image: url('pumpky.gif');
             background-size: contain;
+            position: absolute;
+            left: 320px;
+            top: 40px;
+            
         }
-        .scaredy {
+        #scaredy {
             background-color: rgb(177, 175, 175);
             width: 40px;
             height: 40px;
             display: inline-block;
             background-image: url('scaredy.png');
             background-size: contain;
+            position: absolute;
+            left: 320px;
+            top: 280px;
         }
         .blank {
             background-color: rgb(177, 175, 175);
@@ -67,15 +74,21 @@
             position: absolute;
             left: 40px;
             top: 40px;
+            z-index: 999;
         }
     </style>
 </head>
 <body>
     <div id="world"></div>
     <div id="ninjaman"></div>
+    <div id="pumpky"></div>
+    <div id="scaredy"></div>
 </body>
 <script type="text/javascript">
     var ninjaPac = document.getElementById("ninjaman").style;
+    var pumpky = document.getElementById("pumpky").style;
+    var scaredy = document.getElementById("scaredy").style;
+
     var world = [
         [0,0,0,0,0,0,0,0,0,0],
         [0,1,2,2,1,0,0,2,1,0],
@@ -84,7 +97,7 @@
         [0,2,0,3,1,0,0,1,2,0],
         [0,2,2,2,1,1,2,2,1,0],
         [0,2,0,2,1,2,1,0,3,0],
-        [0,2,2,2,1,2,2,0,5,0],
+        [0,2,2,2,1,2,2,0,1,0],
         [0,0,0,0,0,0,0,0,0,0],
         ];
     var randomWorld = [];
@@ -114,6 +127,8 @@
     }
     createWorld();
 
+
+
     var ninjaCoordinates = {
         x: 1,
         y: 1
@@ -125,8 +140,10 @@
         ninjaPac.left = `${ninjaCoordinates.x * 40}px`
         ninjaPac.top = `${ninjaCoordinates.y * 40}px`
     }
+
+    // Execute if arrow key is pressed
     
-    document.onkeydown = function(e){  //execute if arrow key is pressed
+    document.onkeydown = function(e){  
         const LEFT_KEY = 37
 		const UP_KEY = 38
 		const RIGHT_KEY = 39
@@ -143,13 +160,19 @@
         }
         drawNinjaMan();
 
-        if (world[ninjaCoordinates.y][ninjaCoordinates.x]==2 || world[ninjaCoordinates.y][ninjaCoordinates.x]==3){   // Eats a food
+        // Food will disappear if Pac eats
+
+        if (world[ninjaCoordinates.y][ninjaCoordinates.x]==2 || world[ninjaCoordinates.y][ninjaCoordinates.x]==3){   
             if (world[ninjaCoordinates.y][ninjaCoordinates.x]==2){score += 10}
             else if (world[ninjaCoordinates.y][ninjaCoordinates.x]==3){score += 5}
             world[ninjaCoordinates.y][ninjaCoordinates.x] = 1
             createWorld();
         }
-        if (world[ninjaCoordinates.y][ninjaCoordinates.x]==5){   // Hit by a monster
+
+
+        // Life will decrement when hit by a monster
+
+        if (world[ninjaCoordinates.y][ninjaCoordinates.x]==5){   
             lives--
             createWorld();
             if (lives<0) {
