@@ -88,7 +88,6 @@
     var ninjaPac = document.getElementById("ninjaman").style;
     var pumpky = document.getElementById("pumpky").style;
     var scaredy = document.getElementById("scaredy").style;
-
     var world = [
         [0,0,0,0,0,0,0,0,0,0],
         [0,1,2,2,1,0,0,2,1,0],
@@ -112,6 +111,13 @@
     var score = 0;
     var lives = 3;
 
+    var ninjaCoordinates = {
+        x: 1,
+        y: 1
+    }
+
+    // var currentLocation = elements[world[ninjaCoordinates.y][ninjaCoordinates.x]];
+
     const createWorld = () => {
         output = "";
         for (var i = 0; i < world.length; i++){
@@ -126,15 +132,6 @@
         document.getElementById("world").innerHTML = output;
     }
     createWorld();
-
-
-
-    var ninjaCoordinates = {
-        x: 1,
-        y: 1
-    }
-
-    var currentLocation = elements[world[ninjaCoordinates.y][ninjaCoordinates.x]];
 
     const drawNinjaMan = () => {
         ninjaPac.left = `${ninjaCoordinates.x * 40}px`
