@@ -1,0 +1,70 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+.row {  
+    line-height: 0;
+}
+.wall {
+    background-color: #100347;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+}
+.sushi {
+    background-color: rgb(177, 175, 175);
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-image: url('img/sushi.png');
+    background-size: contain;
+}
+.onigiri {
+    background-color: rgb(177, 175, 175);
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-image: url('img/onigiri.png');
+    background-size: contain;
+}
+#pumpky {
+    background-color: rgb(177, 175, 175);
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-image: url('img/pumpky.gif');
+    background-size: contain;
+    position: absolute;
+    left: 320px;
+    top: 40px;
+    
+}
+#scaredy {
+    background-color: rgb(177, 175, 175);
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-image: url('img/scaredy.png');
+    background-size: contain;
+    position: absolute;
+    left: 320px;
+    top: 280px;
+}
+.blank {
+    background-color: rgb(177, 175, 175);
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+}
+#ninjaman {
+    background-color: rgb(177, 175, 175);
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-image: url('img/ninja.gif');
+    background-size: contain;
+    position: absolute;
+    left: 40px;
+    top: 40px;
+    z-index: 999;
+}
