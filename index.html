@@ -155,6 +155,8 @@
 		const RIGHT_KEY = 39
 		const DOWN_KEY = 40
 
+        // Basic arrow movements and will not walk through walls
+
         if (e.keyCode==LEFT_KEY && world[ninjaCoordinates.y][ninjaCoordinates.x-1] != 0){
             ninjaCoordinates.x--
         } else if (e.keyCode==UP_KEY && world[ninjaCoordinates.y-1][ninjaCoordinates.x] != 0) {
