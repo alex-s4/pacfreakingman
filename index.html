@@ -50,11 +50,13 @@
         x: 8,
         y: 7
     }
+    var isCollidedWithPumpky = (ninjaCoordinates.x === pumpkyCoordinates.x) && (ninjaCoordinates.y === pumpkyCoordinates.y)
+    var isCollidedWithScaredy = (ninjaCoordinates.x == scaredyCoordinates.x) && (ninjaCoordinates.y == scaredyCoordinates.y)
     
 
-    var ninjaCurrentLocation = world[ninjaCoordinates.y][ninjaCoordinates.x];
-    var pumpkyCurrentLocation = world[pumpkyCoordinates.y][pumpkyCoordinates.x];
-    var scaredyCurrentLocation = world[scaredyCoordinates.y][scaredyCoordinates.x];
+    // var ninjaCurrentLocation = world[ninjaCoordinates.y][ninjaCoordinates.x];
+    // var pumpkyCurrentLocation = world[pumpkyCoordinates.y][pumpkyCoordinates.x];
+    // var scaredyCurrentLocation = world[scaredyCoordinates.y][scaredyCoordinates.x];
 
     const createWorld = () => {
         output = "";
@@ -94,6 +96,9 @@
 		const RIGHT_KEY = 39
 		const DOWN_KEY = 40
 
+        isCollidedWithPumpky = (ninjaCoordinates.x === pumpkyCoordinates.x) && (ninjaCoordinates.y === pumpkyCoordinates.y);
+        isCollidedWithScaredy = (ninjaCoordinates.x == scaredyCoordinates.x) && (ninjaCoordinates.y == scaredyCoordinates.y);
+
         // Basic arrow movements and will not walk through walls
 
         if (e.keyCode==LEFT_KEY && world[ninjaCoordinates.y][ninjaCoordinates.x-1] != 0){
@@ -119,7 +124,7 @@
 
         // Life will decrement when collide by a monster (WORK IN PROGRESS)
 
-        if (ninjaCoordinates.x == pumpkyCoordinates.x && ninjaCoordinates.y == pumpkyCoordinates.y || ninjaCoordinates.x == scaredyCoordinates.x && ninjaCoordinates.y == scaredyCoordinates.y){   
+        if ((ninjaCoordinates.x === pumpkyCoordinates.x) && (ninjaCoordinates.y === pumpkyCoordinates.y) || (ninjaCoordinates.x == scaredyCoordinates.x) && (ninjaCoordinates.y == scaredyCoordinates.y)){   
             lives--
             createWorld();
             if (lives<0) {
@@ -127,6 +132,15 @@
                 window.location.reload();
             }
         }
+
+        // if ( isCollidedWithPumpky || isCollidedWithScaredy ){   
+        //     lives--
+        //     createWorld();
+        //     if (lives<0) {
+        //         alert("You have died!")
+        //         window.location.reload();
+        //     }
+        // }
         
     }
 
