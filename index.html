@@ -110,14 +110,13 @@
     var score = 0;
     var lives = 3;
     var ninjaCoordinates = {
-        x: 8,
+        x: 1,
         y: 1
     }
     var pumpkyCoordinates = {
         x: 8,
-        y: 7
+        y: 1
     }
-
 
     // var currentLocation = elements[world[ninjaCoordinates.y][ninjaCoordinates.x]];
 
@@ -137,9 +136,16 @@
     createWorld();
 
     const drawNinjaMan = () => {
-        ninjaPac.left = `${ninjaCoordinates.x * 40}px`
-        ninjaPac.top = `${ninjaCoordinates.y * 40}px`
+        ninjaPac.left = `${ninjaCoordinates.x*40}px`
+        ninjaPac.top = `${ninjaCoordinates.y*40}px`
     }
+
+    const movePumpky = () => {
+        pumpky.left = `${pumpkyCoordinates.x*40}px`
+        pumpky.top = `${pumpkyCoordinates.y*40}px`
+    }
+
+
 
     // Execute if arrow key is pressed
     
