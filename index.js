@@ -46,11 +46,6 @@ var scaredyCoordinates = { // Scaredy's initial position
 // var isCollidedWithPumpky = (ninjaCoordinates.x === pumpkyCoordinates.x) && (ninjaCoordinates.y === pumpkyCoordinates.y)
 // var isCollidedWithScaredy = (ninjaCoordinates.x == scaredyCoordinates.x) && (ninjaCoordinates.y == scaredyCoordinates.y)
 
-
-// var ninjaCurrentLocation = world[ninjaCoordinates.y][ninjaCoordinates.x];
-// var pumpkyCurrentLocation = world[pumpkyCoordinates.y][pumpkyCoordinates.x];
-// var scaredyCurrentLocation = world[scaredyCoordinates.y][scaredyCoordinates.x];
-
 const createWorld = () => {
     output = "";
     for (var i = 0; i < world.length; i++) {
