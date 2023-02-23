@@ -2,23 +2,30 @@ var ninjaPac = document.getElementById("ninjaman").style;
 var pumpky = document.getElementById("pumpky").style;
 var scaredy = document.getElementById("scaredy").style;
 var world = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 2, 2, 1, 0, 0, 2, 1, 0],
-    [0, 2, 0, 2, 1, 1, 1, 3, 0, 0],
-    [0, 2, 2, 2, 1, 2, 0, 1, 2, 0],
-    [0, 2, 0, 3, 1, 0, 0, 1, 2, 0],
-    [0, 2, 2, 2, 1, 1, 2, 2, 1, 0],
-    [0, 2, 0, 2, 1, 2, 1, 0, 3, 0],
-    [0, 2, 2, 2, 1, 2, 2, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 2, 2, 1, 0, 0, 2, 1, 1, 3, 2, 2, 2, 0],
+    [0, 2, 0, 2, 1, 1, 1, 3, 0, 1, 1, 0, 0, 2, 0],
+    [0, 2, 2, 2, 1, 2, 0, 1, 2, 1, 2, 0, 2, 2, 0],
+    [0, 2, 0, 3, 1, 0, 0, 1, 2, 1, 2, 0, 0, 2, 0],
+    [0, 2, 2, 2, 1, 1, 2, 2, 1, 1, 1, 2, 2, 2, 0],
+    [0, 2, 0, 2, 1, 2, 1, 0, 3, 0, 3, 1, 0, 2, 0],
+    [0, 2, 2, 2, 1, 2, 2, 0, 1, 0, 1, 1, 3, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 0],
+    [0, 0, 1, 1, 0, 2, 0, 0, 0, 2, 0, 1, 1, 0, 0],
+    [0, 0, 1, 1, 0, 3, 3, 3, 3, 3, 0, 1, 1, 0, 0],
+    [0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0],
+    [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+    [0, 2, 3, 2, 3, 2, 3, 2, 1, 2, 3, 2, 3, 2, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    
 ];
 var elements = {
     0: "wall",
     1: "blank",
     2: "sushi",
     3: "onigiri",
-    4: "pumpky",
-    5: "scaredy"
+    // 4: "pumpky",
+    // 5: "scaredy"
 };
 
 
@@ -76,49 +83,89 @@ const moveScaredy = () => {
 
 const moveLeftPumpky = () => {
     pumpkyCoordinates.x -= 1
-    movePumpky();
+    if (world[pumpkyCoordinates.y][pumpkyCoordinates.x]==0){
+        pumpkyCoordinates.x += 1
+    } else {
+        movePumpky();
+    }   
 }
 
 const moveDownPumpky = () => {
     pumpkyCoordinates.y += 1
-    movePumpky();
+    if (world[pumpkyCoordinates.y][pumpkyCoordinates.x]==0){
+        pumpkyCoordinates.y -= 1
+    } else {
+        movePumpky();
+    }   
 }
 
 const moveUpPumpky = () => {
     pumpkyCoordinates.y -= 1
-    movePumpky();
+    if (world[pumpkyCoordinates.y][pumpkyCoordinates.x]==0){
+        pumpkyCoordinates.y += 1
+    } else {
+        movePumpky();
+    }   
 }
 
 const moveRightPumpky = () => {
     pumpkyCoordinates.x += 1
-    movePumpky();
+    if (world[pumpkyCoordinates.y][pumpkyCoordinates.x]==0){
+        pumpkyCoordinates.x -= 1
+    } else {
+        movePumpky();
+    }   
 }
 
 const moveLeftScaredy = () => {
     scaredyCoordinates.x -= 1
-    moveScaredy();
+    if (world[scaredyCoordinates.y][scaredyCoordinates.x]==0){
+        scaredyCoordinates.x += 1
+    } else {
+        moveScaredy();
+    }  
 }
 
 const moveDownScaredy = () => {
     scaredyCoordinates.y += 1
-    moveScaredy();
+    if (world[scaredyCoordinates.y][scaredyCoordinates.x]==0){
+        scaredyCoordinates.y -= 1
+    } else {
+        moveScaredy();
+    } 
 }
 
 const moveUpScaredy = () => {
     scaredyCoordinates.y -= 1
-    moveScaredy();
+    if (world[scaredyCoordinates.y][scaredyCoordinates.x]==0){
+        scaredyCoordinates.y += 1
+    } else {
+        moveScaredy();
+    }   
 }
 
 const moveRightScaredy = () => {
     scaredyCoordinates.x += 1
-    moveScaredy();
+    if (world[scaredyCoordinates.y][scaredyCoordinates.x]==0){
+        scaredyCoordinates.x -= 1
+    } else {
+        moveScaredy();
+    }   
+    
 }
 
-// setInterval - monsters will move depending on direction and interval (in millisecond)
+// setInterval - monsters will move on random direction and interval (in millisecond)
 
-// var movingPumpky = setInterval(moveLeftPumpky, 1000)
+var movingPumpky = [moveLeftPumpky, moveDownPumpky, moveRightPumpky, moveUpPumpky]
+var movingScaredy = [moveLeftScaredy, moveDownScaredy, moveRightScaredy, moveUpScaredy]
 
-// var movingScaredy = setInterval(moveUpScaredy, 1000)  
+setInterval( ()=>{
+    movingPumpky[Math.trunc(Math.random()*4)]()
+}, 50)
+
+setInterval( ()=>{
+    movingScaredy[Math.trunc(Math.random()*4)]()
+}, 100)
 
 // Execute if arrow key is pressed
 
@@ -141,7 +188,6 @@ document.onkeydown = function (e) {
     drawNinjaMan();
 
     // Food will disappear if Pac eats
-
     if (world[ninjaCoordinates.y][ninjaCoordinates.x] == 2 || world[ninjaCoordinates.y][ninjaCoordinates.x] == 3) {
         if (world[ninjaCoordinates.y][ninjaCoordinates.x] == 2) { score += 10 }
         else if (world[ninjaCoordinates.y][ninjaCoordinates.x] == 3) { score += 5 }
@@ -151,7 +197,6 @@ document.onkeydown = function (e) {
 
 
     // Life will decrement when collide by a monster (WORK IN PROGRESS)
-
     if ((ninjaCoordinates.x === pumpkyCoordinates.x && ninjaCoordinates.y === pumpkyCoordinates.y) || (ninjaCoordinates.x == scaredyCoordinates.x && ninjaCoordinates.y == scaredyCoordinates.y)) {
         lives--
         createWorld();
