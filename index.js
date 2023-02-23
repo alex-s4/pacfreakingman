@@ -1,6 +1,8 @@
 var ninjaPac = document.getElementById("ninjaman").style;
 var pumpky = document.getElementById("pumpky").style;
 var scaredy = document.getElementById("scaredy").style;
+var lifeCount = document.getElementById("life-count");
+var scoreCount = document.getElementById("score-count");
 var world = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 1, 2, 2, 1, 0, 0, 2, 1, 1, 3, 2, 2, 2, 0],
@@ -27,7 +29,6 @@ var elements = {
     // 4: "pumpky",
     // 5: "scaredy"
 };
-
 
 var score = 0;
 var lives = 3;
@@ -56,7 +57,7 @@ const createWorld = () => {
         output += `</div>`
 
     }
-    output += `<p>You have ${lives} lives</p><br/><p>Score: ${score}</p>`
+    // output += `<p>You have ${lives} lives</p><br/><p>Score: ${score}</p>`
     document.getElementById("world").innerHTML = output;
 }
 createWorld();
@@ -149,25 +150,43 @@ const moveRightScaredy = () => {
     
 }
 
-// setInterval - monsters will move on random direction and interval (in millisecond)
+// Monsters will move on random direction and interval (in millisecond)
 
 var movingPumpky = [moveLeftPumpky, moveDownPumpky, moveRightPumpky, moveUpPumpky]
 var movingScaredy = [moveLeftScaredy, moveDownScaredy, moveRightScaredy, moveUpScaredy]
 
 setInterval( ()=>{
     movingPumpky[Math.trunc(Math.random()*4)]()
-}, 50)
+    minusLife();
+    // console.log(`Pumpky x:${pumpkyCoordinates.x}, y${pumpkyCoordinates.y}`)
+}, 500)
 
 setInterval( ()=>{
     movingScaredy[Math.trunc(Math.random()*4)]()
-}, 100)
+    minusLife();
+}, 500)
+
+// Decrement one life if collided by a monster
+function minusLife() {
+    var isCollidedWithPumpky = (ninjaCoordinates.x === pumpkyCoordinates.x) && (ninjaCoordinates.y === pumpkyCoordinates.y);
+    var isCollidedWithScaredy = (ninjaCoordinates.x === scaredyCoordinates.x) && (ninjaCoordinates.y === scaredyCoordinates.y);
+
+    if ( isCollidedWithPumpky || isCollidedWithScaredy ){   
+        lives--
+        lifeCount.innerText = lives
+        // createWorld();
+        if (lives<0) {
+            alert("You have died!")
+            window.location.reload();
+        }
+    }
+}
+
+
 
 // Execute if arrow key is pressed
 
 document.onkeydown = function (e) {
-
-    // isCollidedWithPumpky = (ninjaCoordinates.x === pumpkyCoordinates.x) && (ninjaCoordinates.y === pumpkyCoordinates.y);
-    // isCollidedWithScaredy = (ninjaCoordinates.x == scaredyCoordinates.x) && (ninjaCoordinates.y == scaredyCoordinates.y);
 
     // Basic arrow movements and will not walk through walls
 
@@ -190,20 +209,28 @@ document.onkeydown = function (e) {
         createWorld();
     }
 
+    console.log(`Ninja x:${ninjaCoordinates.x}, y:${ninjaCoordinates.y}`)
+
+    minusLife();
+
 
     // Life will decrement when collide by a monster (WORK IN PROGRESS)
-    if ((ninjaCoordinates.x === pumpkyCoordinates.x && ninjaCoordinates.y === pumpkyCoordinates.y) || (ninjaCoordinates.x == scaredyCoordinates.x && ninjaCoordinates.y == scaredyCoordinates.y)) {
-        lives--
-        createWorld();
-        if (lives < 0) {
-            alert("You have died!")
-            window.location.reload();
-        }
-    }
+    // if ((ninjaCoordinates.x === pumpkyCoordinates.x && ninjaCoordinates.y === pumpkyCoordinates.y) || (ninjaCoordinates.x == scaredyCoordinates.x && ninjaCoordinates.y == scaredyCoordinates.y)) {
+    //     lives--
+    //     lifeCount.innerText = lives
+    //     // createWorld();
+    //     if (lives < 0) {
+    //         alert("You have died!")
+    //         window.location.reload();
+    //     }
+    // }
+
+    
 
     // if ( isCollidedWithPumpky || isCollidedWithScaredy ){   
     //     lives--
-    //     createWorld();
+    //     lifeCount.innerText = lives
+    //     // createWorld();
     //     if (lives<0) {
     //         alert("You have died!")
     //         window.location.reload();
@@ -211,3 +238,4 @@ document.onkeydown = function (e) {
     // }
 
 }
+
