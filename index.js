@@ -26,8 +26,6 @@ var elements = {
     1: "blank",
     2: "sushi",
     3: "onigiri",
-    // 4: "pumpky",
-    // 5: "scaredy"
 };
 
 var score = 0;
@@ -189,6 +187,23 @@ function minusLife() {
     }
 }
 
+// Game ends if no more food
+function gameWin(){
+    var k
+    var l
+    var worldHasFoodArr = []
+    for (k = 0; k < world.length; k++){
+        worldHasFoodArr.push(world[k].includes(2) || world[k].includes(3))
+        
+    }
+    if(!worldHasFoodArr.includes(true)){
+        alert("GAME OVER! You win")
+        window.location.reload();
+    }
+}
+
+
+
 // Execute if arrow key is pressed
 
 document.onkeydown = function (e) {
@@ -207,6 +222,7 @@ document.onkeydown = function (e) {
     drawNinjaMan();
     eatFood();
     minusLife();
+    gameWin();
 
 }
 
