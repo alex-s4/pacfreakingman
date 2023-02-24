@@ -197,12 +197,14 @@ function gameWin(){
         
     }
     if(!worldHasFoodArr.includes(true)){
-        alert("GAME OVER! You win")
-        window.location.reload();
+        // setTimeout(alert("GAME OVER! You win"), 1000)
+        setTimeout(()=>{
+            alert("End")
+            window.location.reload();
+        }, 200)
+        
     }
 }
-
-
 
 // Execute if arrow key is pressed
 
