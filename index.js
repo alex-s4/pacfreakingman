@@ -44,8 +44,6 @@ var scaredyCoordinates = { // Scaredy's initial position
     x: 8,
     y: 7
 }
-// var isCollidedWithPumpky = (ninjaCoordinates.x === pumpkyCoordinates.x) && (ninjaCoordinates.y === pumpkyCoordinates.y)
-// var isCollidedWithScaredy = (ninjaCoordinates.x == scaredyCoordinates.x) && (ninjaCoordinates.y == scaredyCoordinates.y)
 
 const createWorld = () => {
     output = "";
@@ -55,9 +53,7 @@ const createWorld = () => {
             output += `<div class="${elements[world[i][j]]}"></div>`;
         }
         output += `</div>`
-
     }
-    // output += `<p>You have ${lives} lives</p><br/><p>Score: ${score}</p>`
     document.getElementById("world").innerHTML = output;
 }
 createWorld();
@@ -158,13 +154,25 @@ var movingScaredy = [moveLeftScaredy, moveDownScaredy, moveRightScaredy, moveUpS
 setInterval( ()=>{
     movingPumpky[Math.trunc(Math.random()*4)]()
     minusLife();
-    // console.log(`Pumpky x:${pumpkyCoordinates.x}, y${pumpkyCoordinates.y}`)
 }, 500)
 
 setInterval( ()=>{
     movingScaredy[Math.trunc(Math.random()*4)]()
     minusLife();
 }, 500)
+
+
+// Food will disappear if and gain a score if Ninja Pac eats
+function eatFood() {
+    if (world[ninjaCoordinates.y][ninjaCoordinates.x] == 2 || world[ninjaCoordinates.y][ninjaCoordinates.x] == 3) {
+        if (world[ninjaCoordinates.y][ninjaCoordinates.x] == 2) { score += 10 }
+        else if (world[ninjaCoordinates.y][ninjaCoordinates.x] == 3) { score += 5 }
+        world[ninjaCoordinates.y][ninjaCoordinates.x] = 1
+        createWorld()
+        scoreCount.innerText = score
+    }
+}
+
 
 // Decrement one life if collided by a monster
 function minusLife() {
@@ -174,7 +182,6 @@ function minusLife() {
     if ( isCollidedWithPumpky || isCollidedWithScaredy ){   
         lives--
         lifeCount.innerText = lives
-        // createWorld();
         if (lives<0) {
             alert("You have died!")
             window.location.reload();
@@ -182,14 +189,11 @@ function minusLife() {
     }
 }
 
-
-
 // Execute if arrow key is pressed
 
 document.onkeydown = function (e) {
 
     // Basic arrow movements and will not walk through walls
-
     if (e.key == "ArrowLeft" && world[ninjaCoordinates.y][ninjaCoordinates.x - 1] != 0) {
         ninjaCoordinates.x--
     } else if (e.key == "ArrowUp" && world[ninjaCoordinates.y - 1][ninjaCoordinates.x] != 0) {
@@ -199,43 +203,10 @@ document.onkeydown = function (e) {
     } else if (e.key == "ArrowDown" && world[ninjaCoordinates.y + 1][ninjaCoordinates.x] != 0) {
         ninjaCoordinates.y++
     }
+
     drawNinjaMan();
-
-    // Food will disappear if Pac eats
-    if (world[ninjaCoordinates.y][ninjaCoordinates.x] == 2 || world[ninjaCoordinates.y][ninjaCoordinates.x] == 3) {
-        if (world[ninjaCoordinates.y][ninjaCoordinates.x] == 2) { score += 10 }
-        else if (world[ninjaCoordinates.y][ninjaCoordinates.x] == 3) { score += 5 }
-        world[ninjaCoordinates.y][ninjaCoordinates.x] = 1
-        createWorld();
-    }
-
-    console.log(`Ninja x:${ninjaCoordinates.x}, y:${ninjaCoordinates.y}`)
-
+    eatFood();
     minusLife();
-
-
-    // Life will decrement when collide by a monster (WORK IN PROGRESS)
-    // if ((ninjaCoordinates.x === pumpkyCoordinates.x && ninjaCoordinates.y === pumpkyCoordinates.y) || (ninjaCoordinates.x == scaredyCoordinates.x && ninjaCoordinates.y == scaredyCoordinates.y)) {
-    //     lives--
-    //     lifeCount.innerText = lives
-    //     // createWorld();
-    //     if (lives < 0) {
-    //         alert("You have died!")
-    //         window.location.reload();
-    //     }
-    // }
-
-    
-
-    // if ( isCollidedWithPumpky || isCollidedWithScaredy ){   
-    //     lives--
-    //     lifeCount.innerText = lives
-    //     // createWorld();
-    //     if (lives<0) {
-    //         alert("You have died!")
-    //         window.location.reload();
-    //     }
-    // }
 
 }
 
